@@ -45,6 +45,12 @@ RUN if [ "$COIN" != "" ]; then \
         sed -i "/msgid \"ETH\"/{n;s/msgstr \"\"/msgstr \"${COIN}\"/g}" apps/block_scout_web/priv/gettext/en/LC_MESSAGES/default.po; \
     fi
 
+RUN sed -i "/msgid \"Chat (#blockscout)\"/{n;s/msgstr \"\"/msgstr \"Chat (#altlayer)\"/g}" apps/block_scout_web/priv/gettext/default.pot; \
+    sed -i "/msgid \"Chat (#blockscout)\"/{n;s/msgstr \"\"/msgstr \"Chat (#altlayer)\"/g}" apps/block_scout_web/priv/gettext/en/LC_MESSAGES/default.po;
+
+ENV DISABLE_READ_API='true'
+ENV DISABLE_WRITE_API='true'
+
 # Run forderground build and phoenix digest
 RUN mix compile
 
