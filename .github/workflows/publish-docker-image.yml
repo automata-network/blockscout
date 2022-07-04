@@ -37,6 +37,9 @@ jobs:
           username: ${{ secrets.ALTREGISTRY_USERNAME }}
           password: ${{ secrets.ALTREGISTRY_PASSWORD }}
       
+      - name: Get short hash
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c 1-8`" >> $GITHUB_ENV
+      
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
@@ -44,4 +47,4 @@ jobs:
           images: ${{ env.REGISTRY_NAME }}.azurecr.io/blockscout
       
       - name: Build & Push Docker image
-        run: docker buildx build -t ${{ env.REGISTRY_NAME }}.azurecr.io/blockscout:latest -t ${{ env.REGISTRY_NAME }}.azurecr.io/blockscout:${{ github.sha }} -f ./docker/Dockerfile --push --platform=linux/amd64 .
+        run: docker buildx build -t ${{ env.REGISTRY_NAME }}.azurecr.io/blockscout:latest -t ${{ env.REGISTRY_NAME }}.azurecr.io/blockscout:${{ env.SHORT_SHA }} -f ./docker/Dockerfile --push --platform=linux/amd64 .
