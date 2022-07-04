@@ -7,7 +7,7 @@ name: Publish Docker image
 
 on:
   push:
-    branches: [feat/altlayer]
+    branches: [master]
 
 env:
   REGISTRY_NAME: altregistry
