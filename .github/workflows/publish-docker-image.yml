@@ -51,19 +51,30 @@ jobs:
           ${{ runner.os }}-mix-
 
     - name: Extract metadata (tags, labels) for Docker
-      id: meta
+      id: meta_alt
       uses: docker/metadata-action@v4
       with:
         images: |
           ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}
         tags: |
-          type=raw,value={{sha}}
-          type=raw,value={{branch}}-{{sha}}
-          type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+          type=raw,value={{sha}}-alt
+          type=raw,value={{branch}}-{{sha}}-alt
+          type=raw,value=latest-alt,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta_eth
+      uses: docker/metadata-action@v4
+      with:
+        images: |
+          ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}
+        tags: |
+          type=raw,value={{sha}}-eth
+          type=raw,value={{branch}}-{{sha}}-eth
+          type=raw,value=latest-eth,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
-      id: docker_build
+      id: docker_build_ALT
       with:
         context: .
         file: ./docker/Dockerfile
@@ -73,8 +84,38 @@ jobs:
           type=local,src=${{ github.workspace }}/deps
         cache-to: |
           type=local,dest=${{ github.workspace }}/deps
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.meta_alt.outputs.tags }}
         build-args: |
+          COIN_PARAM=ALT
+          CACHE_EXCHANGE_RATES_PERIOD=
+          DISABLE_READ_API=false
+          API_PATH=
+          NETWORK_PATH=
+          DISABLE_WEBAPP=false
+          DISABLE_WRITE_API=false
+          CACHE_ENABLE_TOTAL_GAS_USAGE_COUNTER=
+          WOBSERVER_ENABLED=false
+          ADMIN_PANEL_ENABLED=false
+          CACHE_ADDRESS_WITH_BALANCES_UPDATE_INTERVAL=
+          DISABLE_BRIDGE_MARKET_CAP_UPDATER=false
+          CACHE_BRIDGE_MARKET_CAP_UPDATE_INTERVAL=
+          SOCKET_ROOT=
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      id: docker_build_ETH
+      with:
+        context: .
+        file: ./docker/Dockerfile
+        push: true
+        builder: ${{ steps.docker-builder.outputs.name }}
+        cache-from: |
+          type=local,src=${{ github.workspace }}/deps
+        cache-to: |
+          type=local,dest=${{ github.workspace }}/deps
+        tags: ${{ steps.meta_eth.outputs.tags }}
+        build-args: |
+          COIN_PARAM=ETH
           CACHE_EXCHANGE_RATES_PERIOD=
           DISABLE_READ_API=false
           API_PATH=
