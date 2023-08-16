@@ -420,9 +420,9 @@ defmodule Explorer.Etherscan.LogsTest do
       log3_details = [
         address: contract_address,
         transaction: transaction,
-        first_topic: "some ALT first topic",
-        second_topic: "some ALT second topic",
-        third_topic: "some ALT third topic"
+        first_topic: "some ATA first topic",
+        second_topic: "some ATA second topic",
+        third_topic: "some ATA third topic"
       ]
 
       _log1 = insert(:log, log1_details)
@@ -477,9 +477,9 @@ defmodule Explorer.Etherscan.LogsTest do
       log3_details = [
         address: contract_address,
         transaction: transaction,
-        first_topic: "some ALT first topic",
-        second_topic: "some ALT second topic",
-        third_topic: "some ALT third topic"
+        first_topic: "some ATA first topic",
+        second_topic: "some ATA second topic",
+        third_topic: "some ATA third topic"
       ]
 
       log1 = insert(:log, log1_details)
