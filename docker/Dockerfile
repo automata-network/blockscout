@@ -36,7 +36,7 @@ RUN mix do deps.get, local.rebar --force, deps.compile
 
 ADD . .
 
-ARG COIN_PARAM='ATA'
+ARG COIN_PARAM='SEP'
 ENV COIN=$COIN_PARAM
 ENV COIN_NAME=$COIN_PARAM
 
