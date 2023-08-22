@@ -1,4 +1,4 @@
-<div style="margin: 0 auto; min-width: min(100vw, 1440px); max-width: 1440px; font-size: min(16px, 1600vw / 1440); padding: calc(56em / 16) calc(120em / 16); box-shadow: 0px 0px 1em rgba(45, 21, 4, 0.08); border-top-left-radius: calc(40em / 16); border-top-right-radius: calc(40em / 16); gap: calc(28em / 16); display: grid">
+<div style="padding: 0 calc(50vw - 50%); width: min(100vw, 1440px); font-size: min(16px, 1600vw / 1440); padding: calc(56em / 16) calc(120em / 16); box-shadow: 0px 0px 1em rgba(45, 21, 4, 0.08); gap: calc(28em / 16); display: grid">
   <div style="gap: 7.5em; display: flex">
     <div style="flex: 1; padding-top: calc(12em / 16); gap: 1em; display: grid">
       <div style="align-items: center; gap: calc(14em / 16); display: flex">
