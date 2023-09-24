@@ -173,7 +173,7 @@
               <dd class="col-sm-9 col-lg-10" data-selector="block-timestamp">
                 <i class="fa-regular fa-clock"></i>
                 <span>
-                  <span data-from-now="<%= block.timestamp %>"></span>
+                  <span id="ata_ts" data-from-now="<%= block.timestamp %>"></span>
                 </span>
                 <%= case processing_time_duration(@transaction) do %>
                   <% :pending -> %>
